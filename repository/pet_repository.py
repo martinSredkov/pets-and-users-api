@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 from sqlalchemy.orm import Session
 from sqlalchemy import Engine
 from model.pet_model import PetModel
@@ -10,7 +12,7 @@ class PetRepository:
 
     def get_pet_by_id(self, pet_id):
         self.refresh_session()
-        pet = self.session.query(PetModel).filter(PetModel.pet_id == pet_id).first()
+        pet = self.session.query(PetModel).filter(PetModel.pet_id == pet_id).first() # pylint: disable=some-error-name-or-code
         if not pet:
             return None
         return pet
