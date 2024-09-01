@@ -16,7 +16,9 @@ disable=
     too-few-public-methods,
     import-error,
     line-too-long,
-    wildcard-import
+    wildcard-import,
+    too-many-arguments,
+    undefined-variable
 
 [FORMAT]
 # Maximum number of characters on a single line.
