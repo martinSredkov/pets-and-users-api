@@ -1,28 +1,22 @@
-import time
-from crypt import methods
-from uu import Error
 import os
 from flask import Flask, request
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-
 from dto.pet import Pet
 from dto.user import User
-from model.user_model import UserModel
 from repository.user_repository import UserRepository
 from repository.pet_repository import PetRepository
-from model.pet_model import PetModel
 from service.pet_service import PetService
 from service.user_service import UserService
-from util.util import serialize_struct, json_msg_from_msg, serialize_list_of_structs
-from dotenv import load_dotenv
+from json_util.util import serialize_struct, json_msg_from_msg, serialize_list_of_structs
 
 load_dotenv()
-DB_USERNAME= os.getenv("DB_USERNAME")
-DB_PASSWORD= os.getenv("DB_PASSWORD")
-DB_HOST= os.getenv("DB_HOST")
-DB_PORT= os.getenv("DB_PORT")
-DB_NAME= os.getenv("DB_NAME")
+DB_USERNAME = os.getenv("DB_USERNAME")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
+
 
 connection_string = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
@@ -62,7 +56,7 @@ def create_user():
     try:
         created = user_service.create_user(User.from_dict(data))
         return serialize_struct(created)
-    except Exception as e:
+    except TypeError as e:
         return json_msg_from_msg(repr(e))
 
 @app.route("/user/<user_id>", methods=["GET"])
@@ -70,7 +64,7 @@ def get_user(user_id):
     try:
         user = user_service.get_user(user_id)
         return serialize_struct(user)
-    except Exception as e:
+    except TypeError as e:
         return json_msg_from_msg(repr(e))
 
 @app.route("/user/<user_id>/add-pet", methods=["POST"])
@@ -79,7 +73,7 @@ def create_pet(user_id):
     try:
         created = pet_service.create_pet_for_user(Pet.from_dict(data), user_id)
         return serialize_struct(created)
-    except Exception as e:
+    except TypeError as e:
         return json_msg_from_msg(repr(e))
 
 
@@ -88,7 +82,7 @@ def get_pet(pet_id):
     try:
         pet = pet_service.get_pet(pet_id)
         return serialize_struct(pet)
-    except Exception as e:
+    except TypeError as e:
         return json_msg_from_msg(repr(e))
 
 @app.route("/pets", methods=["GET"])
@@ -96,16 +90,16 @@ def get_all_pets():
     try:
         all_pets = pet_service.get_all_pets()
         return serialize_list_of_structs(all_pets)
-    except Exception as e:
+    except TypeError as e:
         return json_msg_from_msg(repr(e))
 
 
 @app.route("/pet/<pet_id>/<sid>/<rid>", methods=["POST"])
 def transfer_pet(pet_id, sid, rid):
     try:
-        transfered = pet_service.move_pet_between_users(pet_id,sid, rid)
+        transfered = pet_service.move_pet_between_users(pet_id, sid, rid)
         return serialize_struct(transfered)
-    except Exception as e:
+    except TypeError as e:
         return json_msg_from_msg(repr(e))
 
 @app.route("/user/<user_id>", methods=["DELETE"])
@@ -117,7 +111,7 @@ def get_all_pets_for_user(user_id):
     try:
         all_pets = pet_service.get_all_pets_for_user(user_id)
         return serialize_list_of_structs(all_pets)
-    except Exception as e:
+    except TypeError as e:
         return json_msg_from_msg(repr(e))
 
 @app.route("/health")
@@ -126,5 +120,3 @@ def health():
 
 if __name__ == "__main__":
     app.run()
-
-

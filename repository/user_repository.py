@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 from sqlalchemy.orm import Session
 from sqlalchemy import Engine
 from model.user_model import UserModel

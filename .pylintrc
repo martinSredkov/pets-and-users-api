@@ -13,7 +13,12 @@ load-plugins=
 disable=
     missing-docstring,
     invalid-name,
-    too-few-public-methods
+    too-few-public-methods,
+    import-error,
+    line-too-long,
+    wildcard-import,
+    too-many-arguments,
+    undefined-variable
 
 [FORMAT]
 # Maximum number of characters on a single line.

@@ -1,10 +1,10 @@
 from repository.user_repository import UserRepository
 from repository.pet_repository import PetRepository
+from json_util.util import validate_age, validate_name, map_user_model_to_dto, map_user_dto_to_model
 from dto.user import User
-from util.util import *
 
 class UserService:
-    def __init__(self, user_repository:UserRepository, pet_repository: PetRepository):
+    def __init__(self, user_repository: UserRepository, pet_repository: PetRepository):
         self.user_repository = user_repository
         self.pet_repository = pet_repository
 
@@ -14,7 +14,7 @@ class UserService:
             self.pet_repository.delete_pet(pet.pet_id)
         return self.user_repository.delete_user(user_id)
 
-    def create_user(self, user_dto:User):
+    def create_user(self, user_dto: User):
         if not validate_age(user_dto.age):
             raise Exception("Age is not valid!")
         if not validate_name(user_dto.name):
