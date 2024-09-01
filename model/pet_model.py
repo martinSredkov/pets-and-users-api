@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 class PetModel(Base):
-    __tablename__= "pets"
+    __tablename__ = "pets"
     pet_id = Column("pet_id", Integer, primary_key=True)
     name = Column("name", String(30))
     breed = Column("breed", String(30))

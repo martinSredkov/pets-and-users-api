@@ -1,16 +1,15 @@
-from dto.pet import Pet
-from model.pet_model import PetModel
 from repository.pet_repository import PetRepository
 from repository.user_repository import UserRepository
-from util.util import *
+from json_util.util import validate_age, validate_name, map_pet_dto_to_model, map_pet_model_to_dto
+from dto.pet import Pet
 
 
 class PetService:
-    def __init__(self, pet_repository:PetRepository, user_repository:UserRepository):
+    def __init__(self, pet_repository: PetRepository, user_repository: UserRepository):
         self.pet_repository = pet_repository
         self.user_repository = user_repository
 
-    def create_pet_for_user(self, pet_dto:Pet, user_id):
+    def create_pet_for_user(self, pet_dto: Pet, user_id):
         if not self.user_repository.get_user_by_id(user_id):
             raise  Exception("Invalid user ID")
         if not validate_age(pet_dto.age):

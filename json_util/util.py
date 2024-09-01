@@ -5,7 +5,7 @@ from dto.user import User
 from model.pet_model import PetModel
 from model.user_model import UserModel
 
-def map_pet_model_to_dto(pet_model:PetModel):
+def map_pet_model_to_dto(pet_model: PetModel):
     pet_dto = Pet(
         pet_model.pet_id,
         pet_model.name,
@@ -15,7 +15,7 @@ def map_pet_model_to_dto(pet_model:PetModel):
     )
     return pet_dto
 
-def map_pet_dto_to_model(pet_dto:Pet):
+def map_pet_dto_to_model(pet_dto: Pet):
     pet_model = PetModel(
         pet_dto.name,
         pet_dto.breed,
@@ -24,7 +24,7 @@ def map_pet_dto_to_model(pet_dto:Pet):
     )
     return pet_model
 
-def map_user_model_to_dto(user_model:UserModel):
+def map_user_model_to_dto(user_model: UserModel):
     user_dto = User(
         user_model.id,
         user_model.name,
@@ -49,7 +49,7 @@ def validate_age(age):
 def serialize_struct(serializable):
     return json.dumps(serializable.__dict__)
 
-def json_msg_from_msg(msg:str):
+def json_msg_from_msg(msg: str):
     return json.dumps({
         "message": msg
     })

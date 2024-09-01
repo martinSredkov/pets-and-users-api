@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 class UserModel(Base):
-    __tablename__= "accounts"
+    __tablename__ = "accounts"
     id = Column("user_id", Integer, primary_key=True)
     name = Column("name", String(30))
     age = Column("age", Integer)
