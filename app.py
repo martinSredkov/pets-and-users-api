@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from dto.pet import Pet
 from dto.user import User
@@ -8,7 +9,6 @@ from repository.pet_repository import PetRepository
 from service.pet_service import PetService
 from service.user_service import UserService
 from json_util.util import serialize_struct, json_msg_from_msg, serialize_list_of_structs
-from dotenv import load_dotenv
 
 load_dotenv()
 DB_USERNAME = os.getenv("DB_USERNAME")
