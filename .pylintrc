@@ -1,0 +1,46 @@
+[MASTER]
+# Specify a configuration file.
+# rcfile=
+
+# Python code to execute, usually for sys.path extensions
+# init-hook=
+
+# Load external plugins (comma separated values of paths or names)
+load-plugins=
+
+[MESSAGES CONTROL]
+# Disable the message, report, category or checker with the given id(s).
+disable=
+    missing-docstring,
+    invalid-name,
+    too-few-public-methods
+
+[FORMAT]
+# Maximum number of characters on a single line.
+max-line-length=120
+
+[REPORTS]
+# Tells whether to display a full report or only the messages.
+reports=no
+
+[LOGGING]
+# Format style used to check logging format string. 
+# {old, new, percent}
+logging-format-style=old
+
+[TYPECHECK]
+# List of decorators that produce context managers, such as contextlib.contextmanager.
+contextmanager-decorators=contextlib.contextmanager
+
+[DESIGN]
+# Maximum number of arguments for function / method.
+max-args=5
+
+[CLASSES]
+# List of method names used to check for overrides in descendants classes
+valid-classmethod-first-arg=cls
+
+[EXCEPTIONS]
+# Exceptions that will emit a warning when being caught. Defaults to 
+overgeneral-exceptions=Exception
+
