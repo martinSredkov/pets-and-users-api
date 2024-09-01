@@ -1,6 +1,7 @@
+import time
 from crypt import methods
 from uu import Error
-
+import os
 from flask import Flask, request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -14,11 +15,19 @@ from model.pet_model import PetModel
 from service.pet_service import PetService
 from service.user_service import UserService
 from util.util import serialize_struct, json_msg_from_msg, serialize_list_of_structs
+from dotenv import load_dotenv
 
-connection_string = "mysql+pymysql://root:root@localhost:3306/demo_db"
+load_dotenv()
+DB_USERNAME= os.getenv("DB_USERNAME")
+DB_PASSWORD= os.getenv("DB_PASSWORD")
+DB_HOST= os.getenv("DB_HOST")
+DB_PORT= os.getenv("DB_PORT")
+DB_NAME= os.getenv("DB_NAME")
+
+connection_string = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
 engine = create_engine(connection_string)
 
-session = Session(engine)
 
 pet_repo = PetRepository(engine)
 user_repository = UserRepository(engine)
@@ -111,6 +120,9 @@ def get_all_pets_for_user(user_id):
     except Exception as e:
         return json_msg_from_msg(repr(e))
 
+@app.route("/health")
+def health():
+    return "{ \"message\": \"ok\" }"
 
 if __name__ == "__main__":
     app.run()
